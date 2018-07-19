@@ -1,3 +1,4 @@
+//  **********  NOT USED ANY WHERE TILL NOW ***********
 const tintColor = '#2f95dc';
 
 export default {
@@ -12,3 +13,4 @@ export default {
   noticeBackground: tintColor,
   noticeText: '#fff',
 };
+

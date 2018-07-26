@@ -1,10 +1,61 @@
 import React from 'react';
-import { createSwitchNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import WelcomeScreen from '../screens/WelcomeScreen';
+import AuthScreen from '../screens/AuthScreen';
+import Home from '../screens/Home';
+import ImagePick from '../screens/ImagePick';
+import ReviewScreen from '../screens/ReviewScreen';
+import {Icon} from 'expo';
 
-import MainTabNavigator from './MainTabNavigator';
+const AuthNavigation = createStackNavigator({
+  welcome: { 
+    screen: WelcomeScreen,
+    navigationOptions:{
+      header : null
+    } 
+  },
+  auth: { 
+    screen: AuthScreen,
+    navigationOptions:{
+      header : null
+    } 
+  },
+})
 
-export default createSwitchNavigator({
-  // You could add another route here for authentication.
-  // Read more at https://reactnavigation.org/docs/en/auth-flow.html
-  Main: MainTabNavigator,
-});
+const MainNavigation = createBottomTabNavigator({
+  home: { 
+    screen: Home,
+    navigationOptions:{
+      tabBarOptions : {
+        showLabel : false
+      },
+      tabBarIcon: () => <Icon.Entypo name="home" size={32} color="#c9242c" />,
+    },
+  },
+  image: { 
+    screen: ImagePick,
+    navigationOptions : {
+      tabBarOptions : {
+        showLabel : false
+      },
+      tabBarIcon: () => <Icon.Entypo name="home" size={32} color="#c9242c" />
+  }
+   },
+  review: {
+      screen: ReviewScreen,
+      navigationOptions : {
+        tabBarOptions : {
+          showLabel : false
+        },
+        tabBarIcon: () => <Icon.MaterialIcons name="person" size={32} color="#c9242c" />
+    }
+
+  }
+  },
+);
+
+export default nav = {
+  AuthNavigation,
+  MainNavigation
+}
+

@@ -1,43 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
-import WelcomeScreen from './screens/WelcomeScreen';
-import AuthScreen from './screens/AuthScreen';
-import Home from './screens/Home';
-import ImagePick from './screens/ImagePick';
-import ReviewScreen from './screens/ReviewScreen';
-import SettingScreen from './screens/SettingScreen';
+import { StyleSheet, Text, View,Platform } from 'react-native';
+import Router from './navigation/Router';
+import {AppLoading,Font} from 'expo';
 //import { Provider } from 'react-redux'
 
 //import store from './store'
+
 export default class App extends React.Component {
+
+  state = { fontsAreLoaded: false };
+
+  async componentWillMount() {
+    await Font.loadAsync({
+        'Roboto': require('native-base/Fonts/Roboto.ttf'),
+        'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+      });
+    this.setState({fontsAreLoaded: true});
+}
+
   render() {
-    const MainNavigation = createBottomTabNavigator({
-      welcome: { screen: WelcomeScreen },
-      auth: { screen: AuthScreen },
-      main: {
-        screen: createBottomTabNavigator({
-          home: { screen: Home },
-          image: { screen: ImagePick },
-          review: {
-            screen: createStackNavigator({
-              review: { screen: ReviewScreen },
-              setting: { screen: SettingScreen }
-            })
-          }
-        })
-      }
-    },{
-      navigationOptions:{
-        tabBarVisible:false
-      }
+    if (!this.state.fontsAreLoaded) {
+      return (
+        <AppLoading
+          startAsync={this._cacheResourcesAsync}
+          onFinish={() => this.setState({ isReady: true })}
+          onError={console.warn}
+        />
+      );
     }
-  );
+    
+  else{
+    
     return (
         <View style={styles.container}>
-          <MainNavigation />
+        {Platform.OS==='android' && (
+        <View style={{
+          height : Expo.Constants.statusBarHeight,
+          backgroundColor : 'black',
+        }} />
+        )}
+
+          <Router />
         </View>
     );
+  }
   }
 }
 

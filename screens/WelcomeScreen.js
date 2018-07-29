@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import Slides from '../Component/Slides';
-
+import {Expo} from 'expo';
 const SLIDES_DATA = [
     { text: "Welcome Screen 1", color: "#4286f4" },
     { text: "Welcome Screen 2", color: "#40f740" },
@@ -9,6 +9,7 @@ const SLIDES_DATA = [
 ]
 
 class WelcomeScreen extends Component {
+
     onSlideComplete = () =>{
         this.props.navigation.navigate('auth');
     }

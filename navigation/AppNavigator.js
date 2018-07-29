@@ -1,10 +1,11 @@
 import React from 'react';
-import { createBottomTabNavigator, createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator, createStackNavigator ,createDrawerNavigator } from 'react-navigation';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AuthScreen from '../screens/AuthScreen';
 import Home from '../screens/Home';
 import ImagePick from '../screens/ImagePick';
 import ReviewScreen from '../screens/ReviewScreen';
+import Details from '../screens/Details';
 import {Icon} from 'expo';
 
 const AuthNavigation = createStackNavigator({
@@ -22,9 +23,24 @@ const AuthNavigation = createStackNavigator({
   },
 })
 
+const HomeNav = createStackNavigator({
+  Home : {
+    screen : Home,
+    navigationOptions:{
+      header : null
+    }
+  },
+  Details : {
+    screen : Details,
+    navigationOptions:{
+      header : null
+    }
+  }
+})
+
 const MainNavigation = createBottomTabNavigator({
   home: { 
-    screen: Home,
+    screen: HomeNav,
     navigationOptions:{
       tabBarOptions : {
         showLabel : false
@@ -54,8 +70,19 @@ const MainNavigation = createBottomTabNavigator({
   },
 );
 
+HomeNav.navigationOptions = ({ navigation }) => {
+  let tabBarVisible = true;
+  if (navigation.state.index > 0) {
+    tabBarVisible = false;
+  }
+
+  return {
+    tabBarVisible,
+  };
+};
+
 export default nav = {
   AuthNavigation,
-  MainNavigation
+  MainNavigation,
 }
 

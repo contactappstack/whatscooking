@@ -34,7 +34,9 @@ export default class Router extends React.Component{
 
     render(){
         return(
-            this.state.loggedIn ? <nav.MainNavigation screenProps={this.state.token}/> : <nav.AuthNavigation screenProps={() => this.doFacebookLogin()} />
+            this.state.loggedIn ?
+            <nav.MainNavigation screenProps={this.state.token}/> : 
+            <nav.AuthNavigation screenProps={() => this.doFacebookLogin()} />
         )
     }
 }

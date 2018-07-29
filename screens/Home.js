@@ -1,15 +1,14 @@
 import React ,{Component} from 'react';
 import {StyleSheet} from 'react-native';
-import { AsyncStorage } from 'react-native';
-import { Container, Header, Content, Title, Left, Body, Right} from 'native-base';
-import {Font,AppLoading} from 'expo';
+import { AsyncStorage,TouchableOpacity } from 'react-native';
+import { Container, Header, Content, Title, Left, Body, Button} from 'native-base';
+import {Icon} from 'expo';
 import CardImage from '../components/CardImage';
+import nav from '../navigation/AppNavigator';
 
 // temporary list
 
 class Home extends Component{
-
-    state = { fontsAreLoaded: false };
 
     list = {
        users:[
@@ -46,14 +45,6 @@ class Home extends Component{
        ]
     }
 
-    async componentWillMount() {
-        await Font.loadAsync({
-            'Roboto': require('native-base/Fonts/Roboto.ttf'),
-            'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
-          });
-        this.setState({fontsAreLoaded: true});
-    }
-
     async logout(key) {
         try {
           await AsyncStorage.removeItem(key);
@@ -63,45 +54,39 @@ class Home extends Component{
           return false;
         }
       }
-
+      
     render(){
-        // console.log(screenProps)
-        if (!this.state.fontsAreLoaded) {
-            return (
-              <AppLoading
-                startAsync={this._cacheResourcesAsync}
-                onFinish={() => this.setState({ isReady: true })}
-                onError={console.warn}
-              />
-            );
-          }
-        else{
-            return(
-                <Container>
-                    <Header style={{backgroundColor : "#c9242c"}}>
-                        <Body style={styles.titleView}>
-                            <Title style={{fontSize : 23}}>WhatsCooking</Title>
-                        </Body>                  
-                    </Header>
-                    <Content>
-                        {this.list.users.map(user=>{
-                            return <CardImage key={user.id} source={this.list.users[user.id]}/>
-                        })}
-                    
-                    </Content>
-              </Container>
-            );
-        }
+        return(
+            <Container>
+                <Header style={{backgroundColor : "#c9242c"}}>
+                <Left>
 
+                </Left>
+                    <Body>
+                        <Title style={{fontSize : 23}}>WhatsCooking</Title>
+                    </Body>                  
+                </Header>
+                <Content>
+                    {this.list.users.map(user=>{
+                        return (
+                            <TouchableOpacity key={user.id} onPress={()=>this.props.navigation.navigate('Details',{userid : user.id})}>
+                                <CardImage source={this.list.users[user.id]}/>
+                            </TouchableOpacity>
+                        
+                    )
+                    })}
+                
+                </Content>
+            </Container>
+        );
     }
+
 }
 
 
+
 const styles = StyleSheet.create({
-    titleView : {
-        alignItems : 'center',
-        justifyContent : 'center',
-    },
+
 
 })
 export default Home;

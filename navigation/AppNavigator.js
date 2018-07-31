@@ -4,7 +4,7 @@ import WelcomeScreen from '../screens/WelcomeScreen';
 import AuthScreen from '../screens/AuthScreen';
 import Home from '../screens/Home';
 import ImagePick from '../screens/ImagePick';
-import ReviewScreen from '../screens/ReviewScreen';
+import ProfileScreen from '../screens/ProfileScreen';
 import {Icon} from 'expo';
 
 const AuthNavigation = createStackNavigator({
@@ -42,7 +42,7 @@ const MainNavigation = createBottomTabNavigator({
   }
    },
   review: {
-      screen: ReviewScreen,
+      screen: ProfileScreen,
       navigationOptions : {
         tabBarOptions : {
           showLabel : false

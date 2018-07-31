@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
-import { Container, Header, Content, Title, Left, Body, Button } from 'native-base';
+import { Container, Header, Content, Title, Right, Left, Body, Button } from 'native-base';
 import Drawer from 'react-native-drawer';
 import { Font, AppLoading, Icon } from 'expo';
-import Sidebar from './Sidebar'
 import CardImage from '../components/CardImage';
 
 // temporary list
@@ -66,15 +65,6 @@ class Home extends Component {
         }
     }
 
-    closeDrawer = () => {
-        this._drawer.close()
-    };
-    openDrawer = () => {
-        this._drawer.open()
-    };
-
-
-
     render() {
         // console.log(screenProps)
         const drawerStyles = {
@@ -92,33 +82,25 @@ class Home extends Component {
         }
         else {
             return (
-                <Drawer
-                    ref={(ref) => { this._drawer = ref; }}
-                    content={<Sidebar />}
-                    type="static"
-                    openDrawerOffset={100}
-                    styles={drawerStyles}
-                    tweenHandler={Drawer.tweenPresets.parallax}
-                    onClose={() => this.closeDrawer()} >
-                    <Container>
-                        <Header style={{ backgroundColor: "#c9242c" }}>
-                            <Left>
-                                <Button transparent onPress={() => this.openDrawer()}>
-                                    <Icon.MaterialIcons name='menu' size={32} color="#fff" />
-                                </Button>
-                            </Left>
-                            <Body style={styles.titleView}>
-                                <Title style={{ fontSize: 23 }}>WhatsCooking</Title>
-                            </Body>
-                        </Header>
-                        <Content>
-                            {this.list.users.map(user => {
-                                return <CardImage key={user.id} source={this.list.users[user.id]} />
-                            })}
+                <Container>
 
-                        </Content>
-                    </Container>
-                </Drawer>
+                    <Header style={{ backgroundColor: "#c9242c" }}>
+                        <Left>
+                            <Button transparent onPress={() => this.openDrawer()}>
+                                <Icon.MaterialIcons name='event' size={32} color="#fff" />
+                            </Button>
+                        </Left>
+                        <Body style={styles.titleView}>
+                            <Title style={{ fontSize: 23 }}>WhatsCooking</Title>
+                        </Body>
+                    </Header>
+                    <Content>
+                        {this.list.users.map(user => {
+                            return <CardImage key={user.id} source={this.list.users[user.id]} />
+                        })}
+
+                    </Content>
+                </Container>
             );
         }
 
@@ -128,8 +110,8 @@ class Home extends Component {
 
 const styles = StyleSheet.create({
     titleView: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
 
 })

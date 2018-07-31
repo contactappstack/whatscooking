@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Platform } from 'react-native';
 import { Button } from 'react-native-elements';
 
-class ReviewScreen extends Component {
+class ProfileScreen extends Component {
     // whenever stackNavigation take place it sets the class level property
     static navigationOptions = ({ navigation }) => ({
         title: "Review",
@@ -22,14 +22,14 @@ class ReviewScreen extends Component {
     render() {
         return (
             <View>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
-                <Text>ReviewScreen</Text>
+                <Text>ProfileScreen</Text>
+                <Text>ProfileScreen</Text>
+                <Text>ProfileScreen</Text>
+                <Text>ProfileScreen</Text>
+                <Text>ProfileScreen</Text>
+                <Text>ProfileScreen</Text>
             </View>
         );
     }
 }
-export default ReviewScreen;
+export default ProfileScreen;

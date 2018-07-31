@@ -7,6 +7,7 @@ const SLIDES_DATA = [
     { text: "Welcome Screen 3", color: "#f73baf" }
 ]
 class WelcomeScreen extends Component {
+
     onSlideComplete = () =>{
         this.props.navigation.navigate('auth');
     }

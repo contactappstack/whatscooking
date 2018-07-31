@@ -1,12 +1,8 @@
 import React from 'react';
-import { ImageBackground, Text, StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { ImageBackground, Text, StyleSheet, View} from 'react-native';
 import { Card, CardItem, Thumbnail, Button, Left, Body, Right } from 'native-base';
 import { Icon } from 'expo';
-import DoubleClick from 'react-native-double-click';
 
-let image = null
-const DOUBLE_PRESS_DELAY = 300;
-var doubleTap = false
 export default class CardImage extends React.Component {
     state = {
         fav_color: "#fff"
@@ -43,7 +39,7 @@ export default class CardImage extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    username: {
+    username:{
         fontSize: 18,
         fontWeight: '500',
         color: "#c9242c",
@@ -52,5 +48,4 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: "column",
         marginTop: 20
-    }
-})
+}})

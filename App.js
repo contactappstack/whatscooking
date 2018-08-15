@@ -1,8 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View,Platform } from 'react-native';
 import Router from './navigation/Router';
-
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 import {AppLoading,Font} from 'expo';
+import reducer from './store/reducer';
+
+const store = createStore(reducer);
 
 export default class App extends React.Component {
 
@@ -12,6 +16,7 @@ export default class App extends React.Component {
     await Font.loadAsync({
         'Roboto': require('native-base/Fonts/Roboto.ttf'),
         'Roboto_medium': require('native-base/Fonts/Roboto_medium.ttf'),
+        'Arial': require('native-base/Fonts/arial.ttf'),
       });
     this.setState({fontsAreLoaded: true});
 }
@@ -19,17 +24,21 @@ export default class App extends React.Component {
   render() {
     if (!this.state.fontsAreLoaded) {
       return (
-        <AppLoading
+        <Provider store={store}>
+          <AppLoading
           startAsync={this._cacheResourcesAsync}
           onFinish={() => this.setState({ isReady: true })}
           onError={console.warn}
-        />
+          />
+        </Provider>
+        
       );
     }
     
   else{
     
     return (
+      <Provider store={store}>
         <View style={styles.container}>
         {Platform.OS==='android' && (
         <View style={{
@@ -39,6 +48,8 @@ export default class App extends React.Component {
         )}
           <Router />
         </View>
+      </Provider>
+        
     );
   }
   }
